@@ -155,17 +155,15 @@ def mark_model(n : int):# функция, которая формирует гр
             )
     plt.show()
 
-def probability_mark_process(i: int, j: int, lam: float) -> float:# функция вычисления вероятности перехода из i в j
+def probability_mark_process(i: int, j: int, lam: float) -> float:  # функция вычисления вероятности перехода из i в j
     if i == 0:
         return pow(lam, j) / math.factorial(j) * math.exp(-lam)
     elif j == i - 1:
-        return (math.factorial(i)/math.factorial(i-1)) * float(1/i) * pow(1 - float(1/i), i - 1) * math.exp(-lam)
+        return pow(1 - float(1 / i), i - 1) * math.exp(-lam)
     elif j == i:
-        return ((1 - math.factorial(i)/math.factorial(i-1) * float(1/i) * pow(1 - float(1/i), i - 1)) * math.exp(-lam)
-                + (math.factorial(i)/math.factorial(i-1)) * float(1/i) * pow(1 - float(1/i), i - 1)) * lam * math.exp(-lam)
+        return (1 - pow(1 - float(1 / i),i - 1)) * math.exp(-lam) + pow(1 - float(1 / i), i - 1) * lam * math.exp(-lam)
     elif j > i:
-        return (math.factorial(i) / math.factorial(i-1) * float(1/i) * pow(1 - float(1/i), i - 1) * pow(lam, j - i + 1) / math.factorial(j - i + 1) * math.exp(-lam)
-                + (1 - math.factorial(i)/math.factorial(i-1) * float(1/i) * pow(1 - float(1/i), i - 1)) * pow(lam, j - i) / math.factorial(j - i) * math.exp(-lam))
+        return pow(1 - float(1 / i), i - 1) * pow(lam, j - i + 1) / math.factorial( j - i + 1) * math.exp(-lam) + (1 - pow(1 - float(1 / i), i - 1)) * pow(lam, j - i) / math.factorial(j - i) * math.exp(-lam)
     else:
         return 0
 
